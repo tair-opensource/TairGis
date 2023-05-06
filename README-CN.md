@@ -285,6 +285,7 @@ OK
 > [MEMBER field distance m|km|ft|mi]   
 > [GEOM geom]  
 > [COUNT count]  
+> [LIMIT limit]  
 > [ASC|DESC]  
 > [WITHDIST]  
 > [WITHOUTWKT]  
@@ -299,6 +300,7 @@ OK
 > MEMBER：选择当前area中已存在的POINT作为搜索原点，并指定半径进行搜索，取值顺序为多边形名称（field）、半径（distance）、半径单位（m表示米、km表示千米、ft表示英尺、mi表示英里），例如MEMBER Agrigento 100 km。
 > GEOM：按照WKT的格式设置搜索范围，可以是任意多边形，例如GEOM 'POLYGON((10 30,20 30,20 40,10 40))'。  
 > COUNT：用于限定返回的个数，例如COUNT 3。  
+> LIMIT：Limit 与 Count 的区别是 Limit 是在搜索过程完成，只要搜索到 limit 个元素，就停止搜索（并不一定是最近的范围）；但 Count 是搜索完所有元素并排序之后再进行过滤。    
 > ASC|DESC：用于控制返回信息按照距离排序，ASC表示根据中心位置，由近到远排序；DESC表示由远到近排序。  
 > WITHDIST：用于控制是否返回目标点与搜索原点的距离。  
 > WITHOUTWKT：用于控制是否返回多边形的WKT信息，如果加上该参数，则不返回多边形的WKT信息。

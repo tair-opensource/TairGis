@@ -92,7 +92,7 @@ Run ./runtest --single tairgis in the redis root directory
 > 
 > Description: The value range of longitude is (-180,180), and the value range of latitude is (-90,90). The following collection types are not supported: MULTIPOINT, MULTILINESTRING, MULTIPOLYGON, GEOMETRY, and COLLECTION.
 
-#### return value
+#### Return value
 > Executed successfully: Returns the number of polygons inserted and updated successfully.   
 > In other cases, return the corresponding exception information.
 
@@ -115,7 +115,7 @@ Run ./runtest --single tairgis in the redis root directory
 > area: a geometric concept.  
 > polygonName: The name of the polygon.  
 
-#### return value
+#### Return value
 > Successful execution: WKT information.  
 > area or polygonName does not exist: nil.  
 > In other cases, return the corresponding exception information.
@@ -141,7 +141,7 @@ Execute the GIS.ADD hangzhou campus 'POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10
 > area: a geometric concept.  
 > WITHOUTWKT: It is used to control whether to return the WKT information of the polygon. If this parameter is added, the WKT information of the polygon will not be returned.
 
-#### return value 
+#### Return value 
 > Successful execution: Returns the polygon name and WKT information. If the WITHOUTWKT option is set, only the polygon name is returned.  
 > area does not exist: nil.  
 > In other cases, return the corresponding exception information.  
@@ -287,6 +287,7 @@ Execute the GIS.ADD hangzhou campus 'POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10
 > [MEMBER field distance m|km|ft|mi]   
 > [GEOM geom]  
 > [COUNT count]  
+> [LIMIT limit]  
 > [ASC|DESC]  
 > [WITHDIST]   
 > [WITHOUTWKT]     
@@ -300,14 +301,15 @@ Execute the GIS.ADD hangzhou campus 'POLYGON ((30 10, 40 40, 20 40, 10 20, 30 10
 > RADIUS: Enter longitude, latitude, distance and radius units (m for meters, km for kilometers, ft for feet, mi for miles) to search, for example RADIUS 15 37 200 km .  
 > MEMBER: Select the existing POINT in the current area as the search origin, and specify the radius to search. The value order is polygon name (field), radius (distance), radius unit (m means meter, km means kilometer, ft means feet, mi for miles), such as MEMBER Agrigento 100 km.  
 > GEOM: Set the search range according to the WKT format, which can be any polygon, such as GEOM 'POLYGON((10 30,20 30,20 40,10 40))'.   
-> COUNT: Used to limit the number of returned items, such as COUNT 3.  
+> COUNT: Used to limit the number of returned items, such as COUNT 3.   
+> LIMIT: The difference between Limit and Count is: Limit is completed during the search process, as long as limit elements are searched, the search will stop; but Count is filtering after searching all elements.  
 > ASC|DESC: Used to control the return information to be sorted by distance. ASC means sorting from near to far according to the center position; DESC means sorting from far to near.  
 > WITHDIST: Used to control whether to return the distance between the target point and the search origin.  
 > WITHOUTWKT: It is used to control whether to return the WKT information of the polygon. If this parameter is added, the WKT information of the polygon will not be returned.  
 >  
 > Note: Only one of RADIUS, MEMBER and GEOM can be used at the same time.  
 
-#### return value
+#### Return value
 > Successful execution: the number of target points hit and WKT information.  
 > area does not exist: empty list or set.  
 > In other cases, return the corresponding exception information.  
