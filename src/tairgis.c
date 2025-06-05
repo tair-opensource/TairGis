@@ -561,7 +561,7 @@ void ExGisTypeAofRewrite(RedisModuleIO *aof, RedisModuleString *key, void *value
             h, "^", NULL, 0);
     while ((field = RedisModule_DictNext(NULL, iter, &val)) != NULL) {
         char *wkt = geomEncodeWKT((geom) RedisModule_StringPtrLen(val, NULL), 0);
-        RedisModule_EmitAOF(aof, "GIS.ADD", "scc", key, RedisModule_StringPtrLen(field, NULL), wkt);
+        RedisModule_EmitAOF(aof, "GIS.ADD", "ssc", key, field, wkt);
 
         RedisModule_Free(wkt);
         GisModule_FreeStringSafe(NULL, field);

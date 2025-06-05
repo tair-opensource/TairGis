@@ -319,7 +319,8 @@ start_server {tags {"ex_gis"} overrides {bind 0.0.0.0}} {
 
     test {exgis aof} {
         r config set aof-use-rdb-preamble no
-        set new_field [r gis.add $area polygon1 $polygon_wkt]
+        set binary_key [binary format ccswwww {66} {2} {0} {777} {123} {0} {123}]
+        set new_field [r gis.add $area $binary_key $polygon_wkt]
         assert_equal 1 $new_field
 
         set new_field [r gis.add $area polygon2 $polygon_wkt]
@@ -329,7 +330,7 @@ start_server {tags {"ex_gis"} overrides {bind 0.0.0.0}} {
         waitForBgrewriteaof r
         r debug loadaof
 
-        set res1 [r gis.get $area polygon1]
+        set res1 [r gis.get $area $binary_key]
         set res2 [r gis.get $area polygon2]
         assert_equal $res1 $polygon_wkt
         assert_equal $res2 $polygon_wkt
